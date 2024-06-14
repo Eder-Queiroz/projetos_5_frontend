@@ -55,3 +55,12 @@ export const getUserLock = async () => {
     console.error(error);
   }
 };
+
+export const getLogs = async () => {
+  try {
+    const { data } = await api.get("/log");
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};

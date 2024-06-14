@@ -43,10 +43,12 @@ export const Navigation = ({ path }: NavigationProps) => {
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }}>
               <a
-                href="#"
-                className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900"
+                href="/logs"
+                className={`flex items-center py-5 px-2 text-gray-700 hover:text-gray-900 ${
+                  path === "/logs" ? "font-bold" : ""
+                }`}
               >
-                Dashboard
+                Logs
               </a>
             </motion.div>
           </div>

@@ -8,10 +8,11 @@ import {
   postUserLock,
   getUserLock,
 } from "@/services/apiClient";
-import { FormEvent, useState } from "react";
+import { FormEvent, use, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/navigation";
 import { UserLockDto } from "@/utils/dtos/userlock.dto";
+import { findLockName, findUserName } from "@/utils/lib";
 
 export default function UserLocks({ data, dataUsers, dataUserLocks }: any) {
   const [form, setForm] = useState({});
@@ -64,8 +65,8 @@ export default function UserLocks({ data, dataUsers, dataUserLocks }: any) {
                 ]}
                 data={userLocks.map((userLocks: any) => {
                   return {
-                    user: userLocks.user,
-                    lock: userLocks.lock,
+                    user: findUserName(userLocks.user, users),
+                    lock: findLockName(userLocks.lock, locks),
                   };
                 })}
                 withPagination
