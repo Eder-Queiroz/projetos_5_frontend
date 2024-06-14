@@ -32,6 +32,16 @@ export const Navigation = ({ path }: NavigationProps) => {
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }}>
+              <Link
+                href="/userlocks"
+                className={`flex items-center py-5 px-2 text-gray-700 hover:text-gray-900 ${
+                  path === "/userlocks" ? "font-bold" : ""
+                }`}
+              >
+                Fechaduras-Usuários
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.1 }}>
               <a
                 href="#"
                 className="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900"

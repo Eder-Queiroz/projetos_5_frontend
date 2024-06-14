@@ -6,10 +6,12 @@ import { UserDto } from "@/utils/dtos/users.dto";
 import { FormEvent, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/navigation";
+import { RfidModal } from "@/components/rfidModal";
 
 export default function Home({ data }: any) {
   const [form, setForm] = useState({});
   const [users, setUsers] = useState(data);
+  const [modal, setModal] = useState(false);
 
   const handleChange = (e: HTMLInputElement) => {
     setForm((prev) => {
@@ -22,14 +24,19 @@ export default function Home({ data }: any) {
     setUsers(data);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       await postUser(form as UserDto);
       await handleUpdateUsers();
+      setForm({});
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleOpenModal = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setModal(true);
   };
 
   return (
@@ -78,7 +85,10 @@ export default function Home({ data }: any) {
                 <h3 className="text-xl mb-4">
                   Preencha os dados para cadastro
                 </h3>
-                <form className="space-y-4" onSubmit={(e) => handleSubmit(e)}>
+                <form
+                  className="space-y-4"
+                  onSubmit={(e) => handleOpenModal(e)}
+                >
                   <div>
                     <label
                       htmlFor="cpf"
@@ -98,15 +108,15 @@ export default function Home({ data }: any) {
                   </div>
                   <div>
                     <label
-                      htmlFor="nome"
+                      htmlFor="name"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nome
                     </label>
                     <input
                       type="text"
-                      id="nome"
-                      name="nome"
+                      id="name"
+                      name="name"
                       className="mt-1 p-2 w-full border-gray-300 rounded-md shadow-sm"
                       placeholder="Seu nome completo"
                       onChange={(e) => handleChange(e.target)}
@@ -115,15 +125,15 @@ export default function Home({ data }: any) {
                   </div>
                   <div>
                     <label
-                      htmlFor="senha"
+                      htmlFor="password"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Senha
                     </label>
                     <input
                       type="password"
-                      id="senha"
-                      name="senha"
+                      id="password"
+                      name="password"
                       className="mt-1 p-2 w-full border-gray-300 rounded-md shadow-sm"
                       placeholder="Digite uma senha"
                       onChange={(e) => handleChange(e.target)}
@@ -140,6 +150,13 @@ export default function Home({ data }: any) {
               </div>
             </div>
           </main>
+          <RfidModal
+            isOpen={modal}
+            onClose={() => {
+              setModal(false);
+              handleSubmit();
+            }}
+          />
         </motion.div>
       </AnimatePresence>
     </>
