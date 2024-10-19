@@ -48,7 +48,7 @@ export const Navigation = ({ path }: NavigationProps) => {
                   path === "/logs" ? "font-bold" : ""
                 }`}
               >
-                Logs
+                Historico de Entradas
               </a>
             </motion.div>
           </div>

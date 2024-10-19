@@ -35,7 +35,7 @@ export default function Logs({ initialLogs, users, locks, userLocks }: any) {
         >
           <main className="flex flex-wrap justify-center my-5">
             <div className="w-full p-4">
-              <h2 className="text-2xl font-bold mb-2">Log de Entradas</h2>
+              <h2 className="text-2xl font-bold mb-2">Historico de Entradas</h2>
               <Table
                 columns={[
                   { label: "Usuário", key: "user" },
@@ -62,7 +62,7 @@ export default function Logs({ initialLogs, users, locks, userLocks }: any) {
                 withPagination
                 pagination={{
                   page: 1,
-                  limit: 10,
+                  limit: 1000,
                   total: logs.length,
                   setPage: () => {},
                 }}
